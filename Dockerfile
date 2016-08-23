@@ -1,4 +1,4 @@
-FROM hellosworldos/webserver
+FROM hellosworldos/webserver:xenial
 
 ADD /etc/nginx/magento_rewrites.conf /etc/nginx/magento_rewrites.conf
 ADD /etc/nginx/magento_security.conf /etc/nginx/magento_security.conf
