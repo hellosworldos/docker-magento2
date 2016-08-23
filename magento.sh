@@ -70,13 +70,11 @@ sed -i "s/{{cache_port}}/$CACHE_PORT_11211_TCP_PORT/g" ./local.xml.live.tmp
 mv ./local.xml.live.tmp ./local.xml
 
 cd /var/www/magento/current/
-wget -nc https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar
 chmod 0777 -R /var/www/magento/current/var
-chmod +x ./n98-magerun.phar
-./n98-magerun.phar sys:setup:run
-./n98-magerun.phar dev:log --on --global
+#./n98-magerun2.phar sys:setup:run @TODO replace with something?
+./n98-magerun2.phar dev:log --on --global
 rm -rf var/cache/
-./n98-magerun.phar cache:flush
+./n98-magerun2.phar cache:flush
 
 chown -R magento:dev /var/www/magento/current/
 

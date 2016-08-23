@@ -3,6 +3,7 @@ FROM hellosworldos/webserver:xenial
 ADD /etc/nginx/magento_rewrites.conf /etc/nginx/magento_rewrites.conf
 ADD /etc/nginx/magento_security.conf /etc/nginx/magento_security.conf
 ADD /etc/nginx/conf.d/magento.conf /etc/nginx/conf.d/magento.conf
+ADD /etc/nginx/fastcgi_params_magento.conf /etc/nginx/fastcgi_params_magento.conf
 ADD /magento.sh /root/magento.sh
 ADD /cron.sh /root/cron.sh
 ADD /init.sh /root/init.sh
@@ -16,7 +17,11 @@ RUN chmod +x /root/magento.sh \
     && mkdir -p /var/www/magento/shared/var \
     && chmod 0777 -R /var/www/magento/shared/var \
     && mkdir -p /var/www/magento/shared/media \
-    && mkdir -p /var/log/magento-init
+    && mkdir -p /var/log/magento-init \
+    && cd /usr/local/bin \
+    && wget -nc https://raw.githubusercontent.com/netz98/n98-magerun2/master/n98-magerun2.phar \
+    && chmod +x ./n98-magerun2.phar
+
 
 VOLUME ["/var/www/magento/repo_volume"]
 VOLUME ["/var/www/magento/shared/var", "/var/www/magento/shared/media"]
