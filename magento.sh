@@ -14,11 +14,11 @@ if [ -d /var/www/magento/shared/var ]; then
 fi
 
 if [ -d /var/www/magento/shared/media ]; then
-    if [ ! -h /var/www/magento/current/media ]; then
-        rm -rf /var/www/magento/current/media
+    if [ ! -h /var/www/magento/current/pub/media ]; then
+        rm -rf /var/www/magento/current/pub/media
     fi
 
-    ln -s /var/www/magento/shared/media /var/www/magento/current/
+    ln -s /var/www/magento/shared/media /var/www/magento/current/pub/
 fi
 
 
@@ -41,7 +41,7 @@ if [ -z "$RESULT" ]; then
         echo "Apply magento.sql dump to magento"
         mysql -h$DB_PORT_3306_TCP_ADDR --port=$DB_PORT_3306_TCP_PORT -u$DB_ENV_MYSQL_USER -p$DB_ENV_MYSQL_PASS $DB_ENV_MYSQL_DBNAME < /var/www/magento/shared/sql/magento.sql
 
-        rm -rf /var/www/magento/shared/sql/magento.sql
+        gzip /var/www/magento/shared/sql/magento.sql
     else
         while [ -z "$RESULT" ]; do
             echo "Check database container exists"
