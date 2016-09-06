@@ -55,7 +55,7 @@ fi
 
 cd /var/www/magento/current
 
-touch ./maintenance.flag
+magento maintenance:enable
 
 cd /var/www/magento/current/app/etc/
 cp ./local.xml.widgento.template ./local.xml.live.tmp
@@ -71,11 +71,12 @@ mv ./local.xml.live.tmp ./local.xml
 
 cd /var/www/magento/current/
 chmod 0777 -R /var/www/magento/current/var
-#./n98-magerun2.phar sys:setup:run @TODO replace with something?
+magento setup:db-schema:upgrade
+magento setup:db-data:upgrade
 ./n98-magerun2.phar dev:log --on --global
 rm -rf var/cache/
 ./n98-magerun2.phar cache:flush
 
 chown -R magento:dev /var/www/magento/current/
 
-rm -rf /var/www/magento/current/maintenance.flag
+magento maintenance:disable

@@ -20,7 +20,8 @@ RUN chmod +x /root/magento.sh \
     && mkdir -p /var/log/magento-init \
     && cd /usr/local/bin \
     && wget https://files.magerun.net/n98-magerun2.phar \
-    && chmod +x ./n98-magerun2.phar
+    && chmod +x ./n98-magerun2.phar \
+    && ln -s /var/www/magento/current/bin/magento /usr/local/bin/magento
 
 
 VOLUME ["/var/www/magento/repo_volume"]
